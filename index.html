@@ -113,12 +113,6 @@
             transition: background 0.2s;
         }
         .link-btn:hover { background: #1d4ed8; }
-        .link-btn.secondary {
-            background: white;
-            color: var(--primary);
-            border: 2px solid var(--primary);
-        }
-        .link-btn.secondary:hover { background: var(--primary-light); }
         .warning-box {
             background: var(--warning-light);
             border: 1px solid #fbbf24;
@@ -178,16 +172,6 @@
         }
         .file-card .file-name { font-weight: bold; font-size: 0.9rem; }
         .file-card .file-desc { color: var(--gray-600); font-size: 0.8rem; }
-        .badge {
-            display: inline-block;
-            padding: 2px 8px;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            font-weight: bold;
-        }
-        .badge-done { background: var(--success-light); color: var(--success); }
-        .badge-todo { background: var(--warning-light); color: var(--warning); }
-        .badge-print { background: var(--danger-light); color: var(--danger); }
         .divider { border: none; border-top: 2px solid var(--gray-200); margin: 32px 0; }
         @media (max-width: 600px) {
             body { padding: 12px; }
@@ -202,46 +186,53 @@
     <h1>📋 オリーブジャパン様<br>申請書類ご記入ガイド</h1>
     <p class="subtitle">東京都中小企業振興公社 経営基盤強化事業（一般コース）</p>
 
-    <!-- ファイル一覧 -->
-    <div class="step completed">
-        <div class="step-header">
-            <div class="step-number">📁</div>
-            <div class="step-title">書類一覧（Google Drive）</div>
-        </div>
-        <div class="files-grid">
-            <div class="file-card">
-                <div>
-                    <div class="file-name">📊 申請書</div>
-                    <div class="file-desc">事業計画・申請者情報・経費内訳（全シート）</div>
-                </div>
-                <a href="https://docs.google.com/spreadsheets/d/1mlQMJBNqBqzMcV7mjrDAU-tRyL8WvsDn/edit" target="_blank" class="link-btn" style="font-size:0.8rem; padding:6px 12px;">開く</a>
-            </div>
-            <div class="file-card">
-                <div>
-                    <div class="file-name">📄 誓約書（反社排除）</div>
-                    <div class="file-desc">反社会的勢力排除に関する誓約書</div>
-                </div>
-                <a href="https://docs.google.com/spreadsheets/d/15IT8daOLuviOgPjUgbq2Em97J11_3HOf/edit" target="_blank" class="link-btn" style="font-size:0.8rem; padding:6px 12px;">開く</a>
-            </div>
-            <div class="file-card">
-                <div>
-                    <div class="file-name">📄 誓約書（申請）</div>
-                    <div class="file-desc">助成金申請に係る誓約書</div>
-                </div>
-                <a href="https://docs.google.com/spreadsheets/d/1Z-L40oounkNoOuKH6W_S8Jx_xEgj5qu_/edit" target="_blank" class="link-btn" style="font-size:0.8rem; padding:6px 12px;">開く</a>
-            </div>
-        </div>
-    </div>
-
-    <hr class="divider">
-
     <!-- STEP 1 -->
     <div class="step">
         <div class="step-header">
             <div class="step-number">1</div>
+            <div class="step-title">誓約書をJグランツにアップロード</div>
+        </div>
+        <p class="step-desc">以下の誓約書2通を、そのままJグランツにアップロードしてください。<strong>記入・押印は不要</strong>です。</p>
+
+        <div class="files-grid">
+            <div class="file-card">
+                <div>
+                    <div class="file-name">📄 誓約書（反社会的勢力排除）</div>
+                    <div class="file-desc">そのままアップロード</div>
+                </div>
+                <a href="https://docs.google.com/spreadsheets/d/15IT8daOLuviOgPjUgbq2Em97J11_3HOf/edit" target="_blank" class="link-btn" style="font-size:0.8rem; padding:6px 12px;">DL</a>
+            </div>
+            <div class="file-card">
+                <div>
+                    <div class="file-name">📄 誓約書（助成金申請）</div>
+                    <div class="file-desc">そのままアップロード</div>
+                </div>
+                <a href="https://docs.google.com/spreadsheets/d/1Z-L40oounkNoOuKH6W_S8Jx_xEgj5qu_/edit" target="_blank" class="link-btn" style="font-size:0.8rem; padding:6px 12px;">DL</a>
+            </div>
+        </div>
+
+        <div class="info-box">
+            Google Sheetsで開いたら「<strong>ファイル → ダウンロード → Microsoft Excel (.xlsx)</strong>」でDLし、そのファイルをJグランツにアップロードしてください。
+        </div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="step">
+        <div class="step-header">
+            <div class="step-number">2</div>
             <div class="step-title">申請書の黄色セルを記入</div>
         </div>
         <p class="step-desc">申請書を開き、<strong>黄色に塗られたセル</strong>にご記入ください。それ以外のセルは記入済みです。</p>
+
+        <div class="files-grid" style="margin-bottom:16px;">
+            <div class="file-card">
+                <div>
+                    <div class="file-name">📊 申請書</div>
+                    <div class="file-desc">黄色セルのみ記入してください</div>
+                </div>
+                <a href="https://docs.google.com/spreadsheets/d/1mlQMJBNqBqzMcV7mjrDAU-tRyL8WvsDn/edit" target="_blank" class="link-btn" style="font-size:0.8rem; padding:6px 12px;">開く</a>
+            </div>
+        </div>
 
         <div class="field-group">
             <h4>🔸 申請者1シート — 代表者情報</h4>
@@ -269,68 +260,25 @@
         </div>
     </div>
 
-    <!-- STEP 2 -->
-    <div class="step">
-        <div class="step-header">
-            <div class="step-number">2</div>
-            <div class="step-title">Jグランツで申請</div>
-        </div>
-        <p class="step-desc">本事業はJグランツ（電子申請システム）から申請します。</p>
-
-        <div class="field-group">
-            <h4>🔹 事前準備</h4>
-            <ul class="field-list">
-                <li><strong>gBizIDプライム</strong>のアカウントが必要です（未取得の場合は<a href="https://gbiz-id.go.jp/" target="_blank">こちら</a>から取得）</li>
-                <li>取得済みの場合 → <a href="https://www.jgrants-portal.go.jp/" target="_blank"><strong>Jグランツ</strong></a>にログイン</li>
-            </ul>
-        </div>
-
-        <div class="field-group">
-            <h4>🔹 申請の流れ</h4>
-            <ul class="field-list">
-                <li><strong>①</strong> Jグランツにログイン → 「事業環境変化に対応した経営基盤強化事業」を検索</li>
-                <li><strong>②</strong> 申請フォームに基本情報を入力（会社名・住所・代表者名など）</li>
-                <li><strong>③</strong> STEP 1で記入済みの <strong>申請書（.xlsx）</strong>をアップロード</li>
-                <li><strong>④</strong> 誓約書2通（STEP 3で作成）をアップロード</li>
-                <li><strong>⑤</strong> 確定申告書・決算書（直近2期分）をアップロード</li>
-                <li><strong>⑥</strong> 見積書をアップロード</li>
-                <li><strong>⑦</strong> 内容を確認し「申請」ボタンで送信</li>
-            </ul>
-        </div>
-
-        <div class="warning-box">
-            Jグランツの入力項目と申請書Excelの内容は<strong>一致させてください</strong>。不一致があると差し戻しになります。
-        </div>
-    </div>
-
     <!-- STEP 3 -->
     <div class="step">
         <div class="step-header">
             <div class="step-number">3</div>
-            <div class="step-title">誓約書2通の記入</div>
+            <div class="step-title">申請書をExcelでダウンロード</div>
         </div>
-        <p class="step-desc">以下の2ファイルをDLし、<strong>クリーム色のセル</strong>に記入してください。</p>
+        <p class="step-desc">黄色セルの記入が終わったら、Excelファイルとしてダウンロードしてください。</p>
 
         <div class="field-group">
-            <h4>📄 ① 反社会的勢力排除に関する誓約書</h4>
+            <h4>ダウンロード手順</h4>
             <ul class="field-list">
-                <li>提出日 <span class="cell-ref">B24</span></li>
-                <li>事業者名称 <span class="cell-ref">B25</span> → オリーブジャパン株式会社</li>
-                <li>代表者氏名 <span class="cell-ref">B26</span> → 川島 恵</li>
+                <li><strong>①</strong> Google Sheetsで申請書を開いた状態で</li>
+                <li><strong>②</strong> メニュー「<strong>ファイル</strong>」→「<strong>ダウンロード</strong>」→「<strong>Microsoft Excel (.xlsx)</strong>」</li>
+                <li><strong>③</strong> DLしたファイルを次のSTEPでJグランツにアップロード</li>
             </ul>
         </div>
 
-        <div class="field-group">
-            <h4>📄 ② 助成金申請に係る誓約書</h4>
-            <ul class="field-list">
-                <li>提出日 <span class="cell-ref">B35</span></li>
-                <li>事業者名称 <span class="cell-ref">B36</span> → オリーブジャパン株式会社</li>
-                <li>代表者氏名 <span class="cell-ref">B37</span> → 川島 恵</li>
-            </ul>
-        </div>
-
-        <div class="danger-box">
-            Jグランツでの電子申請のため、<strong>押印は不要</strong>です。Excelファイルのまま提出してください。
+        <div class="warning-box">
+            Google Sheets上では一部の書式（太字・色）が正しく表示されませんが、Excelで開けば正常です。
         </div>
     </div>
 
@@ -338,21 +286,33 @@
     <div class="step">
         <div class="step-header">
             <div class="step-number">4</div>
-            <div class="step-title">申請書をExcelでダウンロード</div>
+            <div class="step-title">Jグランツで申請</div>
         </div>
-        <p class="step-desc">Google Sheetsで記入後、Excelファイルとしてダウンロードしてください。</p>
+        <p class="step-desc">Jグランツ（電子申請システム）から申請を行います。</p>
 
         <div class="field-group">
-            <h4>ダウンロード手順</h4>
+            <h4>🔹 事前準備</h4>
             <ul class="field-list">
-                <li><strong>①</strong> Google Sheetsで申請書を開く</li>
-                <li><strong>②</strong> メニュー「<strong>ファイル</strong>」→「<strong>ダウンロード</strong>」→「<strong>Microsoft Excel (.xlsx)</strong>」</li>
-                <li><strong>③</strong> DLしたファイルをJグランツにアップロード</li>
+                <li><strong>gBizIDプライム</strong>のアカウントが必要です（未取得の場合は<a href="https://gbiz-id.go.jp/" target="_blank">こちら</a>から取得）</li>
             </ul>
         </div>
 
-        <div class="info-box">
-            Google Sheets上では一部の書式（太字・色）が正しく表示されませんが、Excelで開けば正常です。
+        <div class="field-group">
+            <h4>🔹 申請の流れ</h4>
+            <ul class="field-list">
+                <li><strong>①</strong> <a href="https://www.jgrants-portal.go.jp/" target="_blank"><strong>Jグランツ</strong></a>にgBizIDでログイン</li>
+                <li><strong>②</strong> 「事業環境変化に対応した経営基盤強化事業」を検索</li>
+                <li><strong>③</strong> 申請フォームに基本情報を入力（会社名・住所・代表者名など）</li>
+                <li><strong>④</strong> STEP 1の<strong>誓約書2通（.xlsx）</strong>をアップロード</li>
+                <li><strong>⑤</strong> STEP 3でDLした<strong>申請書（.xlsx）</strong>をアップロード</li>
+                <li><strong>⑥</strong> 確定申告書・決算書（直近2期分）をアップロード</li>
+                <li><strong>⑦</strong> 見積書をアップロード</li>
+                <li><strong>⑧</strong> 内容を確認し「<strong>申請</strong>」ボタンで送信</li>
+            </ul>
+        </div>
+
+        <div class="warning-box">
+            Jグランツの入力項目と申請書Excelの内容は<strong>一致させてください</strong>。不一致があると差し戻しになります。
         </div>
     </div>
 
