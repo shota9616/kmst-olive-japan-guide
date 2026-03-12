@@ -18,7 +18,6 @@
             --gray-400: #9ca3af;
             --gray-600: #4b5563;
             --gray-800: #1f2937;
-            --gray-900: #111827;
             --red: #dc2626;
             --red-light: #fef2f2;
         }
@@ -52,25 +51,40 @@
         .progress-bar {
             background: white;
             border-radius: 12px;
-            padding: 16px 20px;
+            padding: 16px 24px;
             margin-bottom: 20px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.08);
             display: flex;
             align-items: center;
-            gap: 16px;
+            justify-content: center;
+            gap: 0;
         }
-        .progress-steps { display: flex; align-items: center; gap: 0; flex: 1; }
+        .progress-step {
+            display: flex;
+            align-items: center;
+            gap: 0;
+        }
         .progress-dot {
-            width: 32px; height: 32px;
+            width: 36px; height: 36px;
             border-radius: 50%;
-            background: var(--gray-200);
-            color: var(--gray-400);
+            background: var(--primary);
+            color: white;
             display: flex; align-items: center; justify-content: center;
-            font-weight: 700; font-size: 0.8rem;
+            font-weight: 700; font-size: 0.85rem;
             flex-shrink: 0;
         }
-        .progress-dot.active { background: var(--primary); color: white; }
-        .progress-line { height: 2px; flex: 1; background: var(--gray-200); min-width: 12px; }
+        .progress-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--gray-600);
+            margin-left: 8px;
+            white-space: nowrap;
+        }
+        .progress-arrow {
+            margin: 0 16px;
+            color: var(--gray-400);
+            font-size: 1.2rem;
+        }
 
         /* Cards */
         .card {
@@ -95,10 +109,25 @@
             font-weight: 800; font-size: 1.1rem;
             flex-shrink: 0;
         }
-        .card-num.green { background: var(--success); }
         .card-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 2px; }
         .card-subtitle { font-size: 0.82rem; color: var(--gray-600); }
         .card-body { padding: 16px 24px 24px; }
+
+        /* Section divider inside card */
+        .section-divider {
+            border: none;
+            border-top: 2px dashed var(--gray-200);
+            margin: 20px 0;
+        }
+        .section-label {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
 
         /* File download row */
         .file-row {
@@ -137,7 +166,7 @@
         .btn-sm { padding: 6px 14px; font-size: 0.78rem; }
 
         /* Input fields list */
-        .input-table { width: 100%; margin-top: 12px; }
+        .input-table { width: 100%; }
         .input-row {
             display: flex;
             align-items: center;
@@ -227,7 +256,9 @@
             .hero h1 { font-size: 1.35rem; }
             .card-body { padding: 14px 18px 20px; }
             .file-row { flex-wrap: wrap; gap: 8px; }
-            .btn { width: 100%; justify-content: center; }
+            .file-row .btn { width: 100%; justify-content: center; }
+            .progress-label { display: none; }
+            .progress-arrow { margin: 0 10px; }
         }
     </style>
 </head>
@@ -235,7 +266,7 @@
 
 <!-- Hero -->
 <div class="hero">
-    <h1>📋 申請書類ご記入ガイド</h1>
+    <h1>📋 申請ガイド</h1>
     <p class="subtitle">オリーブジャパン株式会社 様</p>
     <div class="badge">東京都中小企業振興公社 経営基盤強化事業（一般コース）</div>
 </div>
@@ -244,63 +275,38 @@
 
     <!-- Progress -->
     <div class="progress-bar">
-        <div class="progress-steps">
-            <div class="progress-dot active">1</div>
-            <div class="progress-line"></div>
-            <div class="progress-dot active">2</div>
-            <div class="progress-line"></div>
-            <div class="progress-dot active">3</div>
-            <div class="progress-line"></div>
-            <div class="progress-dot active">4</div>
+        <div class="progress-step">
+            <div class="progress-dot">1</div>
+            <span class="progress-label">申請書を記入</span>
+        </div>
+        <span class="progress-arrow">→</span>
+        <div class="progress-step">
+            <div class="progress-dot">2</div>
+            <span class="progress-label">Jグランツで申請</span>
         </div>
     </div>
 
-    <!-- STEP 1: 誓約書ダウンロード -->
+    <!-- ============================================ -->
+    <!-- STEP 1: 申請書を記入する -->
+    <!-- ============================================ -->
     <div class="card">
         <div class="card-header">
-            <div class="card-num green">1</div>
+            <div class="card-num">1</div>
             <div>
-                <div class="card-title">誓約書をダウンロード</div>
-                <div class="card-subtitle">記入済みです。ダウンロードするだけでOKです。</div>
-            </div>
-        </div>
-        <div class="card-body">
-            <div class="file-row">
-                <span class="file-icon">📄</span>
-                <div class="file-info">
-                    <div class="file-name">反社会的勢力排除に関する誓約書</div>
-                    <div class="file-desc">記入済み → そのまま提出</div>
-                </div>
-                <a href="https://docs.google.com/spreadsheets/d/15IT8daOLuviOgPjUgbq2Em97J11_3HOf/export?format=xlsx" class="btn btn-green btn-sm">⬇ ダウンロード</a>
-            </div>
-            <div class="file-row">
-                <span class="file-icon">📄</span>
-                <div class="file-info">
-                    <div class="file-name">助成金申請に係る誓約書</div>
-                    <div class="file-desc">記入済み → そのまま提出</div>
-                </div>
-                <a href="https://docs.google.com/spreadsheets/d/1Z-L40oounkNoOuKH6W_S8Jx_xEgj5qu_/export?format=xlsx" class="btn btn-green btn-sm">⬇ ダウンロード</a>
-            </div>
-
-            <div class="alert alert-blue">
-                <span class="alert-icon">💡</span>
-                <div>ダウンロードしたファイルは、STEP 4のJグランツ申請時にアップロードします。</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- STEP 2: 申請書の黄色セル記入 -->
-    <div class="card">
-        <div class="card-header">
-            <div class="card-num">2</div>
-            <div>
-                <div class="card-title">申請書の黄色セルを記入</div>
+                <div class="card-title">申請書を記入する</div>
                 <div class="card-subtitle">黄色に塗られたセルだけ記入してください。それ以外は記入済みです。</div>
             </div>
         </div>
         <div class="card-body">
 
-            <a href="https://docs.google.com/spreadsheets/d/1mlQMJBNqBqzMcV7mjrDAU-tRyL8WvsDn/edit" target="_blank" class="btn btn-primary" style="margin-bottom: 16px;">📊 申請書を開く</a>
+            <!-- 開くボタン -->
+            <div class="section-label">① 申請書を開く</div>
+            <a href="https://docs.google.com/spreadsheets/d/1mlQMJBNqBqzMcV7mjrDAU-tRyL8WvsDn/edit" target="_blank" class="btn btn-primary">📊 申請書をGoogle Sheetsで開く</a>
+
+            <hr class="section-divider">
+
+            <!-- 記入項目 -->
+            <div class="section-label">② 黄色セルに記入</div>
 
             <div class="sheet-tag">申請者1 シート</div>
             <div class="input-table">
@@ -350,44 +356,40 @@
                 <span class="alert-icon">💡</span>
                 <div>発行済株式100株の内訳をご記入ください（例：川島50株/50%、庄司50株/50%）</div>
             </div>
-        </div>
-    </div>
 
-    <!-- STEP 3: DL -->
-    <div class="card">
-        <div class="card-header">
-            <div class="card-num">3</div>
-            <div>
-                <div class="card-title">申請書をExcelでダウンロード</div>
-                <div class="card-subtitle">黄色セルの記入が終わったら、Excelファイルとして保存します。</div>
-            </div>
-        </div>
-        <div class="card-body">
+            <hr class="section-divider">
+
+            <!-- DL手順 -->
+            <div class="section-label">③ 記入が終わったらExcelでダウンロード</div>
             <ol class="flow-list">
-                <li>Google Sheetsで申請書を開いた状態で</li>
-                <li>メニュー「<strong>ファイル</strong>」→「<strong>ダウンロード</strong>」→「<strong>Microsoft Excel (.xlsx)</strong>」</li>
-                <li>ダウンロードしたファイルを次のSTEPで使います</li>
+                <li>Google Sheetsのメニュー「<strong>ファイル</strong>」を開く</li>
+                <li>「<strong>ダウンロード</strong>」→「<strong>Microsoft Excel (.xlsx)</strong>」を選択</li>
+                <li>ダウンロードしたファイルは、STEP 2で使います</li>
             </ol>
 
             <div class="alert alert-yellow">
                 <span class="alert-icon">⚠️</span>
-                <div>Google Sheets上では一部の書式（太字・色）が正しく表示されませんが、Excelで開けば正常です。</div>
+                <div>Google Sheets上では書式が崩れて見えますが、Excelで開けば正常です。</div>
             </div>
         </div>
     </div>
 
-    <!-- STEP 4: Jグランツ申請 -->
+    <!-- ============================================ -->
+    <!-- STEP 2: Jグランツで申請する -->
+    <!-- ============================================ -->
     <div class="card">
         <div class="card-header">
-            <div class="card-num">4</div>
+            <div class="card-num">2</div>
             <div>
-                <div class="card-title">Jグランツで申請</div>
-                <div class="card-subtitle">電子申請システム「Jグランツ」から提出します。</div>
+                <div class="card-title">Jグランツで申請する</div>
+                <div class="card-subtitle">電子申請システム「Jグランツ」から書類を提出します。</div>
             </div>
         </div>
         <div class="card-body">
 
-            <div class="file-row" style="margin-bottom: 16px;">
+            <!-- gBizID -->
+            <div class="section-label">🔑 事前準備：gBizIDプライム</div>
+            <div class="file-row">
                 <span class="file-icon">🔑</span>
                 <div class="file-info">
                     <div class="file-name">gBizIDプライムが必要です</div>
@@ -396,32 +398,57 @@
                 <a href="https://gbiz-id.go.jp/" target="_blank" class="btn btn-outline btn-sm">gBizID →</a>
             </div>
 
+            <hr class="section-divider">
+
+            <!-- 申請手順 -->
+            <div class="section-label">📝 申請手順</div>
             <ol class="flow-list">
                 <li><a href="https://www.jgrants-portal.go.jp/" target="_blank"><strong>Jグランツ</strong></a>にgBizIDでログイン</li>
-                <li>「<strong>事業環境変化に対応した経営基盤強化事業</strong>」を検索</li>
+                <li>「<strong>事業環境変化に対応した経営基盤強化事業</strong>」で検索し、申請画面を開く</li>
                 <li>申請フォームに基本情報を入力（会社名・住所・代表者名など）</li>
-                <li>STEP 3でDLした<strong>申請書（.xlsx）</strong>をアップロード</li>
-                <li>STEP 1でDLした<strong>誓約書2通（.xlsx）</strong>をアップロード</li>
+                <li>STEP 1でダウンロードした<strong>申請書（.xlsx）</strong>をアップロード</li>
+                <li>下の<strong>誓約書2通</strong>をダウンロードしてアップロード</li>
                 <li>内容を確認し「<strong>申請</strong>」ボタンで送信 🎉</li>
             </ol>
 
+            <hr class="section-divider">
+
+            <!-- 誓約書DL -->
+            <div class="section-label">📄 誓約書のダウンロード（⑤で使います）</div>
+            <p style="font-size:0.82rem; color:var(--gray-600); margin-bottom:10px;">記入済みです。ダウンロードして、そのままJグランツにアップロードしてください。</p>
+
+            <div class="file-row">
+                <span class="file-icon">📄</span>
+                <div class="file-info">
+                    <div class="file-name">反社会的勢力排除に関する誓約書</div>
+                    <div class="file-desc">記入済み</div>
+                </div>
+                <a href="https://docs.google.com/spreadsheets/d/15IT8daOLuviOgPjUgbq2Em97J11_3HOf/export?format=xlsx" class="btn btn-green btn-sm">⬇ ダウンロード</a>
+            </div>
+            <div class="file-row">
+                <span class="file-icon">📄</span>
+                <div class="file-info">
+                    <div class="file-name">助成金申請に係る誓約書</div>
+                    <div class="file-desc">記入済み</div>
+                </div>
+                <a href="https://docs.google.com/spreadsheets/d/1Z-L40oounkNoOuKH6W_S8Jx_xEgj5qu_/export?format=xlsx" class="btn btn-green btn-sm">⬇ ダウンロード</a>
+            </div>
+
             <div class="alert alert-yellow">
                 <span class="alert-icon">⚠️</span>
-                <div>Jグランツの入力項目と申請書Excelの内容は<strong>一致させてください</strong>。不一致があると差し戻しになります。</div>
+                <div>Jグランツの入力項目と申請書の内容は<strong>一致させてください</strong>。不一致があると差し戻しになります。</div>
             </div>
 
             <div class="alert alert-blue">
                 <span class="alert-icon">📎</span>
-                <div><strong>書類審査を通過した場合のみ</strong>、以下の書類を追加提出します（申請時点では不要）：<br>
-                ・履歴事項全部証明書（発行3ヶ月以内）<br>
-                ・納税証明書（法人事業税・法人都民税）<br>
-                ・決算書（損益計算書）<br>
-                ・見積書 ／ 相見積書</div>
+                <div><strong>書類審査を通過した場合のみ</strong>、追加書類の提出があります（申請時点では不要です）。</div>
             </div>
         </div>
     </div>
 
+    <!-- ============================================ -->
     <!-- スケジュール -->
+    <!-- ============================================ -->
     <div class="card">
         <div class="card-header">
             <div class="card-num" style="background: var(--gray-800);">📅</div>
@@ -432,8 +459,8 @@
         <div class="card-body">
             <div class="schedule">
                 <div class="schedule-row">
-                    <div class="schedule-label">申請期間</div>
-                    <div class="schedule-val">〜 令和8年3月31日（月）17:00</div>
+                    <div class="schedule-label">申請期限</div>
+                    <div class="schedule-val"><strong>令和8年3月31日（月）17:00</strong></div>
                 </div>
                 <div class="schedule-row">
                     <div class="schedule-label">書類審査</div>
@@ -451,21 +478,20 @@
 
             <div class="alert alert-red">
                 <span class="alert-icon">🚨</span>
-                <div><strong>交付決定前の発注・契約は絶対NG</strong>です。交付決定通知を受けてから業者に発注してください。</div>
+                <div><strong>交付決定前の発注・契約は絶対にできません。</strong>交付決定通知を受けてから業者に発注してください。</div>
             </div>
         </div>
     </div>
 
     <!-- お問い合わせ -->
     <div class="card">
-        <div class="card-header">
+        <div class="card-header" style="padding-bottom: 20px;">
             <div class="card-num" style="background: var(--gray-400);">💬</div>
             <div>
                 <div class="card-title">ご不明点</div>
                 <div class="card-subtitle">ご質問がございましたら、担当の鎌倉までお気軽にご連絡ください。</div>
             </div>
         </div>
-        <div class="card-body" style="padding-top: 0;"></div>
     </div>
 
 </div>
