@@ -3,354 +3,476 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>オリーブジャパン様 申請書類ご記入ガイド</title>
+    <title>オリーブジャパン様 申請ガイド</title>
     <style>
         :root {
-            --primary: #2563eb;
-            --primary-light: #dbeafe;
-            --success: #16a34a;
-            --success-light: #dcfce7;
-            --warning: #ca8a04;
-            --warning-light: #fef9c3;
-            --danger: #dc2626;
-            --danger-light: #fef2f2;
+            --primary: #1a56db;
+            --primary-light: #e1effe;
+            --success: #0e9f6e;
+            --success-light: #def7ec;
+            --warning: #c27803;
+            --warning-light: #fdf6b2;
             --gray-50: #f9fafb;
             --gray-100: #f3f4f6;
             --gray-200: #e5e7eb;
+            --gray-400: #9ca3af;
             --gray-600: #4b5563;
             --gray-800: #1f2937;
+            --gray-900: #111827;
+            --red: #dc2626;
+            --red-light: #fef2f2;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            font-family: 'Hiragino Kaku Gothic ProN', 'メイリオ', sans-serif;
-            background: var(--gray-50);
+            font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Kaku Gothic ProN', 'メイリオ', sans-serif;
+            background: #f0f4f8;
             color: var(--gray-800);
-            line-height: 1.7;
-            padding: 20px;
+            line-height: 1.8;
         }
-        .container { max-width: 800px; margin: 0 auto; }
-        h1 {
-            font-size: 1.5rem;
+        .hero {
+            background: linear-gradient(135deg, #1e3a5f 0%, #1a56db 100%);
+            color: white;
+            padding: 48px 20px 40px;
             text-align: center;
-            margin-bottom: 8px;
-            color: var(--primary);
         }
-        .subtitle {
-            text-align: center;
-            color: var(--gray-600);
-            font-size: 0.9rem;
-            margin-bottom: 32px;
+        .hero h1 { font-size: 1.6rem; font-weight: 800; margin-bottom: 6px; }
+        .hero .subtitle { opacity: 0.85; font-size: 0.85rem; }
+        .hero .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-top: 12px;
+            backdrop-filter: blur(4px);
         }
-        .step {
+        .container { max-width: 720px; margin: -24px auto 40px; padding: 0 16px; position: relative; z-index: 1; }
+
+        /* Progress bar */
+        .progress-bar {
             background: white;
             border-radius: 12px;
-            padding: 24px;
+            padding: 16px 20px;
             margin-bottom: 20px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            border-left: 4px solid var(--primary);
-        }
-        .step.completed { border-left-color: var(--success); }
-        .step-header {
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
             display: flex;
             align-items: center;
-            gap: 12px;
-            margin-bottom: 16px;
+            gap: 16px;
         }
-        .step-number {
-            background: var(--primary);
-            color: white;
-            width: 36px;
-            height: 36px;
+        .progress-steps { display: flex; align-items: center; gap: 0; flex: 1; }
+        .progress-dot {
+            width: 32px; height: 32px;
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 1.1rem;
+            background: var(--gray-200);
+            color: var(--gray-400);
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 0.8rem;
             flex-shrink: 0;
         }
-        .step.completed .step-number { background: var(--success); }
-        .step-title { font-size: 1.15rem; font-weight: bold; }
-        .step-desc { color: var(--gray-600); font-size: 0.9rem; margin-bottom: 12px; }
-        .field-group {
-            background: var(--gray-100);
-            border-radius: 8px;
-            padding: 16px;
-            margin-bottom: 12px;
+        .progress-dot.active { background: var(--primary); color: white; }
+        .progress-line { height: 2px; flex: 1; background: var(--gray-200); min-width: 12px; }
+
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: 14px;
+            margin-bottom: 16px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+            overflow: hidden;
         }
-        .field-group h4 {
-            font-size: 0.95rem;
-            margin-bottom: 8px;
-            color: var(--primary);
+        .card-header {
+            padding: 20px 24px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
         }
-        .field-list { list-style: none; }
-        .field-list li {
-            padding: 6px 0;
-            border-bottom: 1px solid var(--gray-200);
-            font-size: 0.9rem;
-        }
-        .field-list li:last-child { border-bottom: none; }
-        .field-list .cell-ref {
-            display: inline-block;
-            background: var(--warning-light);
-            color: var(--warning);
-            font-weight: bold;
-            padding: 1px 6px;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            margin-left: 4px;
-        }
-        .link-btn {
-            display: inline-block;
+        .card-num {
+            width: 40px; height: 40px;
+            border-radius: 10px;
             background: var(--primary);
             color: white;
-            padding: 10px 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 0.9rem;
-            margin-top: 8px;
-            transition: background 0.2s;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 800; font-size: 1.1rem;
+            flex-shrink: 0;
         }
-        .link-btn:hover { background: #1d4ed8; }
-        .warning-box {
-            background: var(--warning-light);
-            border: 1px solid #fbbf24;
-            border-radius: 8px;
-            padding: 12px 16px;
-            font-size: 0.9rem;
-            margin-top: 12px;
-        }
-        .warning-box::before { content: "⚠️ "; }
-        .info-box {
-            background: var(--primary-light);
-            border: 1px solid #93c5fd;
-            border-radius: 8px;
-            padding: 12px 16px;
-            font-size: 0.9rem;
-            margin-top: 12px;
-        }
-        .info-box::before { content: "💡 "; }
-        .danger-box {
-            background: var(--danger-light);
-            border: 1px solid #fca5a5;
-            border-radius: 8px;
-            padding: 12px 16px;
-            font-size: 0.9rem;
-            margin-top: 12px;
-        }
-        .danger-box::before { content: "🚨 "; }
-        .schedule-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 12px;
-            font-size: 0.9rem;
-        }
-        .schedule-table th, .schedule-table td {
-            padding: 10px 12px;
-            border: 1px solid var(--gray-200);
-            text-align: left;
-        }
-        .schedule-table th {
-            background: var(--gray-100);
-            font-weight: bold;
-            width: 30%;
-        }
-        .files-grid {
-            display: grid;
-            gap: 12px;
-            margin-top: 12px;
-        }
-        .file-card {
-            background: var(--gray-100);
-            border-radius: 8px;
-            padding: 12px 16px;
+        .card-num.green { background: var(--success); }
+        .card-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 2px; }
+        .card-subtitle { font-size: 0.82rem; color: var(--gray-600); }
+        .card-body { padding: 16px 24px 24px; }
+
+        /* File download row */
+        .file-row {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 12px;
+            background: var(--gray-50);
+            border: 1px solid var(--gray-200);
+            border-radius: 10px;
+            padding: 12px 16px;
+            margin-bottom: 10px;
         }
-        .file-card .file-name { font-weight: bold; font-size: 0.9rem; }
-        .file-card .file-desc { color: var(--gray-600); font-size: 0.8rem; }
-        .divider { border: none; border-top: 2px solid var(--gray-200); margin: 32px 0; }
-        @media (max-width: 600px) {
-            body { padding: 12px; }
-            .step { padding: 16px; }
-            h1 { font-size: 1.3rem; }
+        .file-row:last-child { margin-bottom: 0; }
+        .file-icon { font-size: 1.3rem; margin-right: 10px; }
+        .file-info { flex: 1; }
+        .file-name { font-weight: 600; font-size: 0.9rem; }
+        .file-desc { font-size: 0.78rem; color: var(--gray-600); }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 8px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.82rem;
+            transition: all 0.15s;
+            white-space: nowrap;
+        }
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-primary:hover { background: #1648b8; }
+        .btn-outline { background: white; color: var(--primary); border: 1.5px solid var(--primary); }
+        .btn-outline:hover { background: var(--primary-light); }
+        .btn-green { background: var(--success); color: white; }
+        .btn-green:hover { background: #0c8a5e; }
+        .btn-sm { padding: 6px 14px; font-size: 0.78rem; }
+
+        /* Input fields list */
+        .input-table { width: 100%; margin-top: 12px; }
+        .input-row {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--gray-100);
+            font-size: 0.88rem;
+        }
+        .input-row:last-child { border-bottom: none; }
+        .input-label { flex: 1; }
+        .input-cell {
+            background: var(--warning-light);
+            color: var(--warning);
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            margin-left: 8px;
+        }
+        .sheet-tag {
+            display: inline-block;
+            background: var(--primary-light);
+            color: var(--primary);
+            font-weight: 600;
+            padding: 2px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            margin: 12px 0 4px;
+        }
+
+        /* Numbered steps */
+        .flow-list { list-style: none; counter-reset: flow; margin-top: 12px; }
+        .flow-list li {
+            counter-increment: flow;
+            padding: 10px 0 10px 44px;
+            position: relative;
+            font-size: 0.88rem;
+            border-bottom: 1px solid var(--gray-100);
+        }
+        .flow-list li:last-child { border-bottom: none; }
+        .flow-list li::before {
+            content: counter(flow);
+            position: absolute; left: 0; top: 10px;
+            width: 28px; height: 28px;
+            background: var(--primary-light);
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 0.8rem;
+        }
+
+        /* Alert boxes */
+        .alert {
+            border-radius: 10px;
+            padding: 14px 16px;
+            font-size: 0.85rem;
+            margin-top: 14px;
+            display: flex;
+            gap: 8px;
+        }
+        .alert-icon { font-size: 1rem; flex-shrink: 0; margin-top: 2px; }
+        .alert-blue { background: var(--primary-light); color: #1e40af; }
+        .alert-yellow { background: var(--warning-light); color: #92400e; }
+        .alert-red { background: var(--red-light); color: var(--red); border: 1px solid #fecaca; }
+
+        /* Schedule */
+        .schedule { margin-top: 12px; }
+        .schedule-row {
+            display: flex;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--gray-100);
+            font-size: 0.88rem;
+        }
+        .schedule-row:last-child { border-bottom: none; }
+        .schedule-label { width: 110px; font-weight: 600; color: var(--gray-600); flex-shrink: 0; }
+        .schedule-val { flex: 1; }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 24px 16px 40px;
+            color: var(--gray-400);
+            font-size: 0.75rem;
+        }
+
+        @media (max-width: 480px) {
+            .hero { padding: 36px 16px 32px; }
+            .hero h1 { font-size: 1.35rem; }
+            .card-body { padding: 14px 18px 20px; }
+            .file-row { flex-wrap: wrap; gap: 8px; }
+            .btn { width: 100%; justify-content: center; }
         }
     </style>
 </head>
 <body>
+
+<!-- Hero -->
+<div class="hero">
+    <h1>📋 申請書類ご記入ガイド</h1>
+    <p class="subtitle">オリーブジャパン株式会社 様</p>
+    <div class="badge">東京都中小企業振興公社 経営基盤強化事業（一般コース）</div>
+</div>
+
 <div class="container">
 
-    <h1>📋 オリーブジャパン様<br>申請書類ご記入ガイド</h1>
-    <p class="subtitle">東京都中小企業振興公社 経営基盤強化事業（一般コース）</p>
-
-    <!-- STEP 1 -->
-    <div class="step">
-        <div class="step-header">
-            <div class="step-number">1</div>
-            <div class="step-title">誓約書をJグランツにアップロード</div>
+    <!-- Progress -->
+    <div class="progress-bar">
+        <div class="progress-steps">
+            <div class="progress-dot active">1</div>
+            <div class="progress-line"></div>
+            <div class="progress-dot active">2</div>
+            <div class="progress-line"></div>
+            <div class="progress-dot active">3</div>
+            <div class="progress-line"></div>
+            <div class="progress-dot active">4</div>
         </div>
-        <p class="step-desc">以下の誓約書2通は<strong>記入済み</strong>です。ダウンロードして、Jグランツの申請画面に添付してください。</p>
+    </div>
 
-        <div class="files-grid">
-            <div class="file-card">
-                <div>
-                    <div class="file-name">📄 誓約書（反社会的勢力排除）</div>
-                    <div class="file-desc">記入済み → DLして添付</div>
-                </div>
-                <a href="https://docs.google.com/spreadsheets/d/15IT8daOLuviOgPjUgbq2Em97J11_3HOf/edit" target="_blank" class="link-btn" style="font-size:0.8rem; padding:6px 12px;">DL</a>
-            </div>
-            <div class="file-card">
-                <div>
-                    <div class="file-name">📄 誓約書（助成金申請）</div>
-                    <div class="file-desc">記入済み → DLして添付</div>
-                </div>
-                <a href="https://docs.google.com/spreadsheets/d/1Z-L40oounkNoOuKH6W_S8Jx_xEgj5qu_/edit" target="_blank" class="link-btn" style="font-size:0.8rem; padding:6px 12px;">DL</a>
+    <!-- STEP 1: 誓約書ダウンロード -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-num green">1</div>
+            <div>
+                <div class="card-title">誓約書をダウンロード</div>
+                <div class="card-subtitle">記入済みです。ダウンロードするだけでOKです。</div>
             </div>
         </div>
-
-        <div class="info-box">
-            上のリンクからGoogle Sheetsを開き、「<strong>ファイル → ダウンロード → Microsoft Excel (.xlsx)</strong>」でDLしてください。DLしたファイルをJグランツの申請画面で添付します。
-        </div>
-    </div>
-
-    <!-- STEP 2 -->
-    <div class="step">
-        <div class="step-header">
-            <div class="step-number">2</div>
-            <div class="step-title">申請書の黄色セルを記入</div>
-        </div>
-        <p class="step-desc">申請書を開き、<strong>黄色に塗られたセル</strong>にご記入ください。それ以外のセルは記入済みです。</p>
-
-        <div class="files-grid" style="margin-bottom:16px;">
-            <div class="file-card">
-                <div>
-                    <div class="file-name">📊 申請書</div>
-                    <div class="file-desc">黄色セルのみ記入してください</div>
+        <div class="card-body">
+            <div class="file-row">
+                <span class="file-icon">📄</span>
+                <div class="file-info">
+                    <div class="file-name">反社会的勢力排除に関する誓約書</div>
+                    <div class="file-desc">記入済み → そのまま提出</div>
                 </div>
-                <a href="https://docs.google.com/spreadsheets/d/1mlQMJBNqBqzMcV7mjrDAU-tRyL8WvsDn/edit" target="_blank" class="link-btn" style="font-size:0.8rem; padding:6px 12px;">開く</a>
+                <a href="https://docs.google.com/spreadsheets/d/15IT8daOLuviOgPjUgbq2Em97J11_3HOf/export?format=xlsx" class="btn btn-green btn-sm">⬇ ダウンロード</a>
+            </div>
+            <div class="file-row">
+                <span class="file-icon">📄</span>
+                <div class="file-info">
+                    <div class="file-name">助成金申請に係る誓約書</div>
+                    <div class="file-desc">記入済み → そのまま提出</div>
+                </div>
+                <a href="https://docs.google.com/spreadsheets/d/1Z-L40oounkNoOuKH6W_S8Jx_xEgj5qu_/export?format=xlsx" class="btn btn-green btn-sm">⬇ ダウンロード</a>
+            </div>
+
+            <div class="alert alert-blue">
+                <span class="alert-icon">💡</span>
+                <div>ダウンロードしたファイルは、STEP 4のJグランツ申請時にアップロードします。</div>
             </div>
         </div>
+    </div>
 
-        <div class="field-group">
-            <h4>🔸 申請者1シート — 代表者情報</h4>
-            <ul class="field-list">
-                <li>川島 恵さんの <strong>生年月日</strong> <span class="cell-ref">G19</span></li>
-                <li>川島 恵さんの <strong>メールアドレス</strong> <span class="cell-ref">G21</span></li>
-                <li>庄司 紗梨加さんの <strong>生年月日</strong> <span class="cell-ref">G22</span></li>
-                <li>庄司 紗梨加さんの <strong>メールアドレス</strong> <span class="cell-ref">G27</span></li>
-            </ul>
+    <!-- STEP 2: 申請書の黄色セル記入 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-num">2</div>
+            <div>
+                <div class="card-title">申請書の黄色セルを記入</div>
+                <div class="card-subtitle">黄色に塗られたセルだけ記入してください。それ以外は記入済みです。</div>
+            </div>
         </div>
+        <div class="card-body">
 
-        <div class="field-group">
-            <h4>🔸 申請者2シート — 取引先・株主情報</h4>
-            <ul class="field-list">
-                <li><strong>主要取引先 1社目</strong>：社名 <span class="cell-ref">B7</span> ／ 年間取引高 <span class="cell-ref">I7</span></li>
-                <li><strong>主要取引先 2社目</strong>：社名 <span class="cell-ref">B8</span> ／ 年間取引高 <span class="cell-ref">I8</span></li>
-                <li><strong>主要取引先 3社目</strong>：社名 <span class="cell-ref">B9</span> ／ 年間取引高 <span class="cell-ref">I9</span></li>
-                <li>川島 恵さんの <strong>持株数</strong> <span class="cell-ref">J26</span> ／ <strong>持株比率</strong> <span class="cell-ref">K26</span></li>
-                <li>庄司 紗梨加さんの <strong>持株数</strong> <span class="cell-ref">J27</span> ／ <strong>持株比率</strong> <span class="cell-ref">K27</span></li>
-            </ul>
-        </div>
+            <a href="https://docs.google.com/spreadsheets/d/1mlQMJBNqBqzMcV7mjrDAU-tRyL8WvsDn/edit" target="_blank" class="btn btn-primary" style="margin-bottom: 16px;">📊 申請書を開く</a>
 
-        <div class="info-box">
-            発行済株式100株の内訳をご記入ください（例：川島50株/50%、庄司50株/50%）
+            <div class="sheet-tag">申請者1 シート</div>
+            <div class="input-table">
+                <div class="input-row">
+                    <span class="input-label">川島 恵さんの <strong>生年月日</strong></span>
+                    <span class="input-cell">G19</span>
+                </div>
+                <div class="input-row">
+                    <span class="input-label">川島 恵さんの <strong>メールアドレス</strong></span>
+                    <span class="input-cell">G21</span>
+                </div>
+                <div class="input-row">
+                    <span class="input-label">庄司 紗梨加さんの <strong>生年月日</strong></span>
+                    <span class="input-cell">G22</span>
+                </div>
+                <div class="input-row">
+                    <span class="input-label">庄司 紗梨加さんの <strong>メールアドレス</strong></span>
+                    <span class="input-cell">G27</span>
+                </div>
+            </div>
+
+            <div class="sheet-tag">申請者2 シート</div>
+            <div class="input-table">
+                <div class="input-row">
+                    <span class="input-label"><strong>主要取引先 1社目</strong>：社名 / 年間取引高</span>
+                    <span class="input-cell">B7</span><span class="input-cell">I7</span>
+                </div>
+                <div class="input-row">
+                    <span class="input-label"><strong>主要取引先 2社目</strong>：社名 / 年間取引高</span>
+                    <span class="input-cell">B8</span><span class="input-cell">I8</span>
+                </div>
+                <div class="input-row">
+                    <span class="input-label"><strong>主要取引先 3社目</strong>：社名 / 年間取引高</span>
+                    <span class="input-cell">B9</span><span class="input-cell">I9</span>
+                </div>
+                <div class="input-row">
+                    <span class="input-label">川島 恵さんの <strong>持株数 / 持株比率</strong></span>
+                    <span class="input-cell">J26</span><span class="input-cell">K26</span>
+                </div>
+                <div class="input-row">
+                    <span class="input-label">庄司 紗梨加さんの <strong>持株数 / 持株比率</strong></span>
+                    <span class="input-cell">J27</span><span class="input-cell">K27</span>
+                </div>
+            </div>
+
+            <div class="alert alert-blue">
+                <span class="alert-icon">💡</span>
+                <div>発行済株式100株の内訳をご記入ください（例：川島50株/50%、庄司50株/50%）</div>
+            </div>
         </div>
     </div>
 
-    <!-- STEP 3 -->
-    <div class="step">
-        <div class="step-header">
-            <div class="step-number">3</div>
-            <div class="step-title">申請書をExcelでダウンロード</div>
+    <!-- STEP 3: DL -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-num">3</div>
+            <div>
+                <div class="card-title">申請書をExcelでダウンロード</div>
+                <div class="card-subtitle">黄色セルの記入が終わったら、Excelファイルとして保存します。</div>
+            </div>
         </div>
-        <p class="step-desc">黄色セルの記入が終わったら、Excelファイルとしてダウンロードしてください。</p>
+        <div class="card-body">
+            <ol class="flow-list">
+                <li>Google Sheetsで申請書を開いた状態で</li>
+                <li>メニュー「<strong>ファイル</strong>」→「<strong>ダウンロード</strong>」→「<strong>Microsoft Excel (.xlsx)</strong>」</li>
+                <li>ダウンロードしたファイルを次のSTEPで使います</li>
+            </ol>
 
-        <div class="field-group">
-            <h4>ダウンロード手順</h4>
-            <ul class="field-list">
-                <li><strong>①</strong> Google Sheetsで申請書を開いた状態で</li>
-                <li><strong>②</strong> メニュー「<strong>ファイル</strong>」→「<strong>ダウンロード</strong>」→「<strong>Microsoft Excel (.xlsx)</strong>」</li>
-                <li><strong>③</strong> DLしたファイルを次のSTEPでJグランツにアップロード</li>
-            </ul>
-        </div>
-
-        <div class="warning-box">
-            Google Sheets上では一部の書式（太字・色）が正しく表示されませんが、Excelで開けば正常です。
-        </div>
-    </div>
-
-    <!-- STEP 4 -->
-    <div class="step">
-        <div class="step-header">
-            <div class="step-number">4</div>
-            <div class="step-title">Jグランツで申請</div>
-        </div>
-        <p class="step-desc">Jグランツ（電子申請システム）から申請を行います。</p>
-
-        <div class="field-group">
-            <h4>🔹 事前準備</h4>
-            <ul class="field-list">
-                <li><strong>gBizIDプライム</strong>のアカウントが必要です（未取得の場合は<a href="https://gbiz-id.go.jp/" target="_blank">こちら</a>から取得）</li>
-            </ul>
-        </div>
-
-        <div class="field-group">
-            <h4>🔹 申請の流れ</h4>
-            <ul class="field-list">
-                <li><strong>①</strong> <a href="https://www.jgrants-portal.go.jp/" target="_blank"><strong>Jグランツ</strong></a>にgBizIDでログイン</li>
-                <li><strong>②</strong> 「事業環境変化に対応した経営基盤強化事業」を検索</li>
-                <li><strong>③</strong> 申請フォームに基本情報を入力（会社名・住所・代表者名など）</li>
-                <li><strong>④</strong> <strong>申請書（.xlsx）</strong>をアップロード</li>
-                <li><strong>⑤</strong> <strong>誓約書2通（.xlsx）</strong>をアップロード</li>
-                <li><strong>⑥</strong> 内容を確認し「<strong>申請</strong>」ボタンで送信</li>
-            </ul>
-        </div>
-
-        <div class="warning-box">
-            Jグランツの入力項目と申請書Excelの内容は<strong>一致させてください</strong>。不一致があると差し戻しになります。
-        </div>
-
-        <div class="info-box">
-            <strong>書類審査を通過した場合のみ</strong>、以下の書類を追加提出します（申請時点では不要）：<br>
-            ・履歴事項全部証明書（発行3ヶ月以内）<br>
-            ・納税証明書（法人事業税・法人都民税）<br>
-            ・決算書（損益計算書）<br>
-            ・見積書（税抜30万円以上）／相見積書（税抜100万円以上）
+            <div class="alert alert-yellow">
+                <span class="alert-icon">⚠️</span>
+                <div>Google Sheets上では一部の書式（太字・色）が正しく表示されませんが、Excelで開けば正常です。</div>
+            </div>
         </div>
     </div>
 
-    <hr class="divider">
+    <!-- STEP 4: Jグランツ申請 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-num">4</div>
+            <div>
+                <div class="card-title">Jグランツで申請</div>
+                <div class="card-subtitle">電子申請システム「Jグランツ」から提出します。</div>
+            </div>
+        </div>
+        <div class="card-body">
+
+            <div class="file-row" style="margin-bottom: 16px;">
+                <span class="file-icon">🔑</span>
+                <div class="file-info">
+                    <div class="file-name">gBizIDプライムが必要です</div>
+                    <div class="file-desc">未取得の場合は先にアカウントを作成してください</div>
+                </div>
+                <a href="https://gbiz-id.go.jp/" target="_blank" class="btn btn-outline btn-sm">gBizID →</a>
+            </div>
+
+            <ol class="flow-list">
+                <li><a href="https://www.jgrants-portal.go.jp/" target="_blank"><strong>Jグランツ</strong></a>にgBizIDでログイン</li>
+                <li>「<strong>事業環境変化に対応した経営基盤強化事業</strong>」を検索</li>
+                <li>申請フォームに基本情報を入力（会社名・住所・代表者名など）</li>
+                <li>STEP 3でDLした<strong>申請書（.xlsx）</strong>をアップロード</li>
+                <li>STEP 1でDLした<strong>誓約書2通（.xlsx）</strong>をアップロード</li>
+                <li>内容を確認し「<strong>申請</strong>」ボタンで送信 🎉</li>
+            </ol>
+
+            <div class="alert alert-yellow">
+                <span class="alert-icon">⚠️</span>
+                <div>Jグランツの入力項目と申請書Excelの内容は<strong>一致させてください</strong>。不一致があると差し戻しになります。</div>
+            </div>
+
+            <div class="alert alert-blue">
+                <span class="alert-icon">📎</span>
+                <div><strong>書類審査を通過した場合のみ</strong>、以下の書類を追加提出します（申請時点では不要）：<br>
+                ・履歴事項全部証明書（発行3ヶ月以内）<br>
+                ・納税証明書（法人事業税・法人都民税）<br>
+                ・決算書（損益計算書）<br>
+                ・見積書 ／ 相見積書</div>
+            </div>
+        </div>
+    </div>
 
     <!-- スケジュール -->
-    <div class="step completed">
-        <div class="step-header">
-            <div class="step-number">📅</div>
-            <div class="step-title">スケジュール</div>
+    <div class="card">
+        <div class="card-header">
+            <div class="card-num" style="background: var(--gray-800);">📅</div>
+            <div>
+                <div class="card-title">スケジュール</div>
+            </div>
         </div>
-        <table class="schedule-table">
-            <tr><th>申請期間</th><td>〜 令和8年3月31日（月）17:00</td></tr>
-            <tr><th>書類審査</th><td>令和8年4月〜</td></tr>
-            <tr><th>面接審査</th><td>令和8年5月7日（木）〜 5月22日（金）<br><small>※いずれか1日・約1時間（コンサル同席不可）</small></td></tr>
-            <tr><th>交付決定</th><td>令和8年6月下旬予定</td></tr>
-        </table>
+        <div class="card-body">
+            <div class="schedule">
+                <div class="schedule-row">
+                    <div class="schedule-label">申請期間</div>
+                    <div class="schedule-val">〜 令和8年3月31日（月）17:00</div>
+                </div>
+                <div class="schedule-row">
+                    <div class="schedule-label">書類審査</div>
+                    <div class="schedule-val">令和8年4月〜</div>
+                </div>
+                <div class="schedule-row">
+                    <div class="schedule-label">面接審査</div>
+                    <div class="schedule-val">令和8年5月7日（木）〜 5月22日（金）<br><small style="color:var(--gray-600)">※いずれか1日・約1時間（コンサル同席不可）</small></div>
+                </div>
+                <div class="schedule-row">
+                    <div class="schedule-label">交付決定</div>
+                    <div class="schedule-val">令和8年6月下旬予定</div>
+                </div>
+            </div>
 
-        <div class="danger-box">
-            <strong>交付決定前の発注・契約は絶対NG</strong>です。交付決定通知を受けてから業者に発注してください。
+            <div class="alert alert-red">
+                <span class="alert-icon">🚨</span>
+                <div><strong>交付決定前の発注・契約は絶対NG</strong>です。交付決定通知を受けてから業者に発注してください。</div>
+            </div>
         </div>
     </div>
 
     <!-- お問い合わせ -->
-    <div class="step">
-        <div class="step-header">
-            <div class="step-number">💬</div>
-            <div class="step-title">ご不明点</div>
+    <div class="card">
+        <div class="card-header">
+            <div class="card-num" style="background: var(--gray-400);">💬</div>
+            <div>
+                <div class="card-title">ご不明点</div>
+                <div class="card-subtitle">ご質問がございましたら、担当の鎌倉までお気軽にご連絡ください。</div>
+            </div>
         </div>
-        <p class="step-desc">ご質問・ご不明点がございましたら、担当の鎌倉までお気軽にご連絡ください。</p>
+        <div class="card-body" style="padding-top: 0;"></div>
     </div>
 
 </div>
+
+<div class="footer">
+    株式会社KMST — 申請サポート
+</div>
+
 </body>
 </html>
